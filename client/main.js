@@ -5,8 +5,22 @@
 // 그냥 js로 설정하면 둘 다 작동 가능
 // cjs : node.js에서 작동하는 commonJS
 
-const a = 'hello';
+// alert('경고창!!!');
+
+// confirm('정말... 지울거야..?');
+
+// prompt('당신은 사람입니까?');
+
+
+
+const a = "hello";
+
+
+
 
 function sum() {
+
   console.log(1 + 2);
+
+
 }
