@@ -15,8 +15,10 @@
 
 ### Basic
 
-- [x] Code Structure [바로가기](https://github.com/simseonbeom/core_js/blob/main/client/chapter/core/01.codeStructure.js)
-- [x] Variable [바로가기](https://github.com/simseonbeom/core_js/blob/main/client/chapter/core/02.variables.js)
+- [x] Code Structure [바로가기](https://github.com/gofla1996/corejs/blob/main/client/chapter/core/01.codeStructure.js)
+- [x] Variable [바로가기](https://github.com/simseonbeom/corejs/blob/main/client/chapter/core/02.variables.js)
+- [x] Legacy Var [바로가기]
+(https://github.com/gofla1996/corejs/blob/main/client/chapter/core/05.ㅣlegacyVar.js)
 
 
 
