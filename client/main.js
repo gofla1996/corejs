@@ -11,16 +11,8 @@
 
 // prompt('당신은 사람입니까?');
 
-
-
-const a = "hello";
-
-
-
+const a = 'hello';
 
 function sum() {
-
   console.log(1 + 2);
-
-
 }
