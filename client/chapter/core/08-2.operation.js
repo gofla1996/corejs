@@ -29,6 +29,9 @@ let same = number[0] === number[1];
 console.log(same);
 
 // 문자 비교
+
+
+
 // 사전편집(lexicographical) 순
 // 사전 뒤쪽의 문자가 앞쪽의 문자보다 크다고 판단
 // 예) 'ㅎ' > 'ㄱ' → true
