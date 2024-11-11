@@ -2,9 +2,7 @@
 /* Object    */
 /* --------- */
 
-
 /* Primitives vs. Object --------- */
-
 
 const html = /* html */ `
   
@@ -13,10 +11,7 @@ const html = /* html */ `
     hello!
   </div>
 
-`
-
-
-
+`;
 
 // key:value 쌍으로 구성된 엔티티(entity) 데이터 구조
 let cssCode = /* css */ `
@@ -34,8 +29,8 @@ let cssCode = /* css */ `
 `;
 
 // 위 CSS 스타일 코드를 JavaScript 객체로 작성해봅니다.
-let dialog = { 
-  position:'fixed',
+let dialog = {
+  position: 'fixed',
   zIndex: 10000,
   top: '50%',
   left: '50%',
@@ -43,9 +38,8 @@ let dialog = {
   maxWidth: 800,
   height: '40vh',
   minHeight: 280,
-  transform: 'translate(-50%, -50%)'
+  transform: 'translate(-50%, -50%)',
 };
-
 
 // 인증 사용자 정보를 객체로 구성해봅니다.
 // 인증 사용자(authentication user)
@@ -56,63 +50,51 @@ let dialog = {
 
 let authUser = null;
 
-
 authUser = {
   uuid: crypto.randomUUID(),
   name: 'tiger',
   email: 'seonbeom2@gmail.com',
   isSignIn: false,
-  permission: 'paid' // paid | free
-}
-
-
+  permission: 'paid', // paid | free
+};
 
 // authentication
 // authorization
 
-
-
-
-
 // 점(.) 표기법
 // authUser 객체의 프로퍼티에 접근해 Console에 출력해봅니다.
 
-// getter 
+// getter
 console.log(authUser.uuid);
 console.log(authUser.name);
 console.log(authUser.email);
 console.log(authUser.isSignIn);
 console.log(authUser.permission);
 
-
-
 // setter
-console.log(authUser.permission = 'free');
+console.log((authUser.permission = 'free'));
 
 // 대괄호([]) 표기법
-// 유료 사용자 권한(paid User Rights) 이름으로 프로퍼티를 재정의하고 
+// 유료 사용자 권한(paid User Rights) 이름으로 프로퍼티를 재정의하고
 // 대괄호 표기법을 사용해 접근 Console에 출력해봅니다.
 
-// getter 
-console.log( authUser['uuid'] );
-console.log( authUser['name'] );
-console.log( authUser['email'] );
-console.log( authUser['isSignIn'] );
-console.log( authUser['permission'] );
+// getter
+console.log(authUser['uuid']);
+console.log(authUser['name']);
+console.log(authUser['email']);
+console.log(authUser['isSignIn']);
+console.log(authUser['permission']);
 
 //setter
-console.log( authUser['permission'] = 'paid');
+console.log((authUser['permission'] = 'paid'));
 
-
-
-// 객체의 key만을 모아서 배열로 반환하는 객체의 static method는? 
+// 객체의 key만을 모아서 배열로 반환하는 객체의 static method는?
 
 const keys = Object.keys(authUser);
 
-// 객체의 value만을 모아서 배열로 반환하는 객체의 static method는? 
+// 객체의 value만을 모아서 배열로 반환하는 객체의 static method는?
 
 const values = Object.values(authUser);
-
 
 // keys
 // function getProperties(obj){
@@ -127,66 +109,54 @@ const values = Object.values(authUser);
 //   return arr;
 // }
 
-function getProperties(obj){
-
+function getProperties(obj) {
   let arr = [];
 
-  for(const key in obj){
-    if(Object.hasOwn(obj,key)){
-      arr.push(key)
+  for (const key in obj) {
+    if (Object.hasOwn(obj, key)) {
+      arr.push(key);
     }
   }
   return arr;
 }
 
-
-getProperties(authUser)
-
+getProperties(authUser);
 
 console.clear();
 
 // 제거(remove) or 삭제(delete)
 //   비워두기       메모리 날림
 
-
-
-
-function removeProperty(obj,key){
-  if (isObject(obj)){
+function removeProperty(obj, key) {
+  if (isObject(obj)) {
     obj[key] = null;
   }
-
 }
-
 
 // removeProperty(authUser,'uuid'); authUser.uuid = null;
 
-
-function deleteProperty(obj,key){
-  if (isObject(obj)){
+function deleteProperty(obj, key) {
+  if (isObject(obj)) {
     delete obj[key];
   }
 }
 
 // 프로퍼티 포함 여부 확인
 
-
 // 프로퍼티 나열
 
 // 계산된 프로퍼티 (computed property)
 let calculateProperty = 'phone'; // phone | tel
 
-function createUser(name,age,phone){
+function createUser(name, age, phone) {
   return {
     name: name,
     age: age,
     [calculateProperty + '번호']: phone,
-  }
+  };
 }
 
-
-// 프로퍼티 제거 or 삭제 
-
+// 프로퍼티 제거 or 삭제
 
 // 단축 프로퍼티(short-hand properties)
 let name = '선범';
@@ -194,58 +164,105 @@ let email = 'seonbeom2@euid.dev';
 let authorization = 'Lv. 99';
 let isLogin = true;
 
-
 const student = {
   name,
   email,
   authorization,
-  isLogin, 
-}
+  isLogin,
+};
 
 // 프로퍼티 이름 제한
 // 예약어: class, if, switch, for, while, ...
-
 
 // 객체가 프로퍼티를 포함하는 지 유무를 반환하는 유틸리티 함수 isEmptyObject 작성
 function isEmptyObject() {
   return null;
 }
 
-
-
-
 /* ------------------------------------------- */
 /* 배열 구조 분해 할당  destructuring assignments   */
 /* ------------------------------------------- */
 
 // 순서(order)를 바꿀 수는 없음. 변수명은 내 맘대로.
-const arr = [10,100,1000,10_000];
+const arr = [10, 100, 1000, 10_000];
 
 // 할당만 안 해줬을 뿐 실제 배열 안에는 존재한다.
 // const [,,a3] = arr;
 
+arr[4] = '안녕';
+
 // rest?
 // 기본값 설정
 // const [a1,...rest] = arr;
-const [a1,a2,a3,a4,a5 = 100_000] = arr;
-
-arr[4] = '안녕';
-
+const [a1, a2, a3, a4, a5 = 100_000] = arr;
 
 // const a1 = arr[0];
 // const a2 = arr[1];
 // const a3 = arr[2];
 
+console.log(a5);
 
-console.log( a5 );
-
-const [first,second] = document.querySelectorAll('span');
+const [first, second] = document.querySelectorAll('span');
 
 console.log(first);
 console.log(second);
 
+for (const [k, v] of Object.entries(authUser)) {
+  console.log(k);
+  console.log(v);
+}
 
+Object.entries(authUser).forEach(([k, v]) => {
+  console.log(k);
+});
 
+Object.entries(authUser).map(([k, v]) => v);
+
+console.clear();
 /* -------------------------------------------- */
 /* 객체 구조 분해 할당  destructuring assignments    */
 /* --------------------------------------------- */
+
+const salaries = {
+  김미리: 800,
+  박혜미: 130,
+  이성우: 400,
+  명재휘: 80,
+};
+
+// 객체의 구조 분해 할당 : 순서가 상관 없음. 객체의 key와 변수의 이름이 동일해야 함.
+
+const {
+  박혜미: 박 = 100,
+  이성우: 이 = 200,
+  명재휘: 명 = 300,
+  김미리: 김 = 400,
+} = salaries;
+
+const { 김미리, 박혜미, 이성우, 명재휘 } = salaries;
+
+console.clear();
+
+function createUserObject({ name, age, address, ...rest } = {}) {
+
+  // 왜 분해 하나요?
+  // const { name, age, address, phone, job } = obj;
+
+  console.log(rest);
+
+  return { name, age, address };
+}
+
+const data = {
+  name: '심선범',
+  age: '35',
+  address: '중랑구',
+  phone: '010-1234-5678',
+  job: '강사',
+};
+
+const user = createUserObject(data);
+
+const { log:g } = console;
+
+g('안녕');
