@@ -1,5 +1,9 @@
 
-const typeOf = (data) => Object.prototype.toString.call(data).slice(8, -1).toLowerCase();
+
+
+
+
+const typeOf = data => Object.prototype.toString.call(data).slice(8,-1).toLowerCase()
 
 
 const isObject = data => typeOf(data) === 'object'
@@ -11,3 +15,25 @@ const isBigInt = data => typeOf(data) === 'bigint'
 const isFunction = data => typeOf(data) === 'function'
 const isMath = data => typeOf(data) === 'math'
 const isUndefined = data => typeOf(data) === 'undefined'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
