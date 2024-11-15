@@ -8,16 +8,19 @@
 // object literal -> function constructor -> class syntax
 
 
+
+
+
 class Animal {
 
-  // public class field 정적으로 쓸 수 있는 공간 변수를 받지 못한다.
   legs = 4;
   tail = true;
-  #name = 'unknown'; // private field 밖에서는 접근 불가능 / 캡슐화
+  #name = 'unknown';
 
-  constructor(name) { // 최초 1회만 실행 -> 초기화
-    this.#name = name;
+  constructor(name){ // 최초 1회만 실행 -> 초기화
+    this.#name = name
     this.stomach = [];
+    // console.log( this.#name );
   }
 
   get eat(){
@@ -27,46 +30,73 @@ class Animal {
   set eat(food){
     this.stomach.push(food);
   }
-
 }
 
+const options = {
+  version: '1.0.0',
+  company: '8b-studio',
+  ceo: '심선범'
+}
 
 class Tiger extends Animal {
 
-  options = {
+  static defaultProps = {
     version: '1.0.0',
     company: '8b-studio',
     ceo: '심선범'
   }
 
-  
   constructor(name){
-    super(name); // 부모의 생성자를 호출
+    super(name);
     this.pattern = '호랑이 무늬'
   }
 
   hunt(target){
     this.prey = target;
-    return `${target}에게 조용히 접근한다.`;
+    return `${target}에게 조용히 접근한다.`
   }
 
   static bark(sound){
-    return sound + '🐯';
+    return sound + '🐯'
   }
+
 
 }
 
-// const a = new Animal('몽실이');
 
+
+// const a = new Animal('몽실이');
 const 호랑이 = new Tiger('호돌이');
 
+// const arr = new Array()
+
+
+// arr.forEach()
+// Array.isArray()
+
+// class Array extends Object(){
+  
+//   forEach(){
+
+//   }
+
+//   reduce(){
+
+//   }
+
+//   static isArray(){
+
+//   }
+// }
 
 
 
-/*
+
+/* 
 1. 버튼 선택
 2. 클릭 이벤트
-3. 카운트
+3. 태그 만들기
+4. 태그 화면에 랜더링 하기
 */
 
 
@@ -74,33 +104,33 @@ const 호랑이 = new Tiger('호돌이');
 
 class Button{
 
+  #value = 100;
+
   constructor(selector){
     this.button = document.querySelector(selector);
     this.count = 0;
     this.attachEvent();
+ 
+    
   }
 
   static showMessage(selector){
-    console.log(document.querySelector(selector).textContent)
+    console.log(document.querySelector(selector).textContent);
   }
 
   createTag(){
     return `<div>${++this.count + 'clicked'}</div>`
   }
   
-  _render(){
+  #render(){ // private field
     document.body.insertAdjacentHTML('beforeend',this.createTag())
   }
 
   handleClick(){
-
-    this._render()
-    
+    this.#render()
   }
   
   attachEvent(){
-    
-
     this.button.addEventListener('click',()=> this.handleClick())
   }
 
@@ -109,7 +139,7 @@ class Button{
 const button = new Button('.btn');
 
 
-// const button2 = new Button('.btn2');
+const button2 = new Button('.btn2');
 
 
 
@@ -121,14 +151,6 @@ const button = new Button('.btn');
 
 // let count = 0;
 
-// // function handleClick(){
-
-// //   const tag = `
-// //     <div>${++count + 'clicked!'}</div>
-// //   `
-
-// //   document.body.insertAdjacentHTML('beforeend',tag);
-// // }
 
 // function createTag(){
 //   return `<div>${++count + 'clicked'}</div>`
@@ -144,28 +166,49 @@ const button = new Button('.btn');
   
 // }
 
-
 // _button.addEventListener('click',handleClick)
 
 
-class User {
 
+
+
+// class 문법이 따로 있고, 
+// constructor를 정의한다.
+
+class User {
+  
   #password;
 
   constructor(userID,userPW){
     this.userID = userID;
-    this.password = this.hashPassword(userPW);
-
+    this.#password = this.hashPassword(userPW);
   }
 
   hashPassword(pw){
-    return 'hashCODE' + pw + '소금챱챱'  
+    return 'hashCODE' + pw + '소금챱챱';
   }
 
   checkPassword(pw){
-    return this.#password === this.checkPassword(pw);
+    return this.#password === this.hashPassword(pw);
   }
 }
 
-const user = new User('tiger','hellow123');
+
+const user = new User('tiger','hello123');
+
+
+
+// class AdminUser extends User{
+
+//   checkPassword(){
+//     this.#password
+//   }
+// }
+
+
+
+
+
+
+
 
