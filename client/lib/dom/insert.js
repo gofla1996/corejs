@@ -14,7 +14,7 @@ function insertFirst(node,text){
 
 }
 
-function insertLast(node,text){
+export function insertLast(node,text){
 
   if(isString(node)) node = getNode(node);
   node.insertAdjacentHTML('beforeend',text);

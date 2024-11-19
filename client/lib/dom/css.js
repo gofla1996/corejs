@@ -16,7 +16,7 @@
 */
 
 
-function addClass(node,...className){
+export function addClass(node,...className){
 
   if(isString(node)) node = getNode(node);
   
@@ -37,7 +37,7 @@ function addClass(node,...className){
 }
 
 
-function removeClass(node,className){
+export function removeClass(node,className){
   if(isString(node)) node = getNode(node);
   if(!className){
     node.className = '';
@@ -46,7 +46,7 @@ function removeClass(node,className){
 }
 
 
-function toggleClass(node,className){
+export function toggleClass(node,className){
   if(isString(node)) node = getNode(node);
   return node.classList.toggle(className);
 }
@@ -81,4 +81,4 @@ function setCss(node,prop,value){
 
 
 
-const css = (node,prop,value) => !value ? getCss(node,prop) : setCss(node,prop,value);
+export const css = (node,prop,value) => !value ? getCss(node,prop) : setCss(node,prop,value);
