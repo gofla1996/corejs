@@ -5,7 +5,12 @@
 // import { insertLast } from './lib/dom/insert.js';
 // import clearContents from './lib/dom/clearContents.js';
 
-import { getNode, insertLast, clearContents } from './lib/dom/index.js';
+import { 
+  getNode, 
+  getNodes, 
+  insertLast, 
+  clearContents 
+} from './lib/index.js';
 
 // 1. input 선택하기
 // 2. input 이벤트 바인딩

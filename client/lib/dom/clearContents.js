@@ -1,4 +1,7 @@
 
+import {isString} from '../utils/type.js';
+import { getNode } from "./getNode.js";
+
 
 export default function clearContents(node){
   if(isString(node)) node = getNode(node);
@@ -10,3 +13,13 @@ export default function clearContents(node){
 
   node.textContent = '';
 }
+
+
+
+
+
+
+
+
+
+

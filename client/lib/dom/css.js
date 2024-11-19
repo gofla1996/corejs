@@ -1,5 +1,6 @@
-/* global syntaxError */
-
+import { isString, isObject, isArray } from '../utils/type.js';
+import { getNode } from "./getNode.js";
+import { syntaxError } from "../error/syntaxError.js";
 
 
 /* -------------------------------------------- */
@@ -7,14 +8,13 @@
 /* -------------------------------------------- */
 
 
-// js doc 작성법
-/** 
+/**
  * @function DOM Element에 클래스를 추가하는 함수
- * @type {HTMLElement | string} node
- * @type {string | array | object} className
- * @return {void}
-*/
-
+ * @author kindtiger 
+ * @type {HTMLElement | string} node 
+ * @type  {string | array | object} className 
+ * @return {void} 
+ */
 
 export function addClass(node,...className){
 
@@ -35,8 +35,6 @@ export function addClass(node,...className){
     }
   })
 }
-
-
 export function removeClass(node,className){
   if(isString(node)) node = getNode(node);
   if(!className){
@@ -44,14 +42,10 @@ export function removeClass(node,className){
   }
   node.classList.remove(className);
 }
-
-
 export function toggleClass(node,className){
   if(isString(node)) node = getNode(node);
   return node.classList.toggle(className);
 }
-
-
 
 
 
@@ -71,7 +65,6 @@ function getCss(node,prop){
 
 }
 
-
 function setCss(node,prop,value){
   if(isString(node)) node = getNode(node);
   if(!(prop in document.body.style)) throw syntaxError('setCss 함수의 두 번째 인수는 유효한 css 속성 이어야 합니다.');
@@ -79,6 +72,7 @@ function setCss(node,prop,value){
   node.style[prop] = value;
 }
 
-
-
 export const css = (node,prop,value) => !value ? getCss(node,prop) : setCss(node,prop,value);
+
+
+
