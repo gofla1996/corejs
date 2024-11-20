@@ -1,42 +1,115 @@
-// named export 현재 우리가 한 것 => import { } from '..' : 중괄호 필수, 여러 개를 불러올 수 있음, 이름 지정할 수 있는 방법 있음
-// default export => import ... from '..' : 중괄호 없이 사용 가능, 이름을 마음대로 지정
+
+
+
+// named export           =>  import { getNode as $, insertLast } from '..'
+// default export         =>  import ... from '..'
 
 // import { getNode as $, getNodes } from './lib/dom/getNode.js';
 // import { insertLast } from './lib/dom/insert.js';
-// import clearContents from './lib/dom/clearContents.js';
+
+// import clearContents from "./lib/dom/clearContents.js";
+
+
 
 import { 
-  getNode, 
+  getNode as $, 
   getNodes, 
+  typeError, 
   insertLast, 
-  clearContents 
-} from './lib/index.js';
-
-// 1. input 선택하기
-// 2. input 이벤트 바인딩
-// 3. input의 value 값 가져오기
-// 4. 숫자 더하기 
-// 5. result에 출력하기 
-
-
-/* global clearContents */
-
-const first = getNode('#firstNumber');
-const second = getNode('#secondNumber');
-const result = getNode('.result');
+  clearContents, 
+ } from './lib/index.js'
 
 
 
-function handleInput(){
-  const firstValue = Number(first.value);
-  const secondValue = +second.value;
-  const total = firstValue + secondValue 
 
-  
-  clearContents(result);
-  insertLast(result,total)
-  
-}
+ function phase1(){
+  // 1. input 선택하기
+  // 2. input 이벤트 바인딩
+  // 3. input의 value 값 가져오기
+  // 4. 숫자 더하기 
+  // 5. result에 출력하기 
 
-first.addEventListener('input',handleInput)
-second.addEventListener('input',handleInput)
+
+
+  const first = $('#firstNumber');
+  const second = $('#secondNumber');
+  const result = $('.result');
+  const clear = $('#clear');
+
+
+
+  function handleInput(){
+    const firstValue = Number(first.value);
+    const secondValue = +second.value;
+    const total = firstValue + secondValue;
+    
+    clearContents(result);
+    insertLast(result,total)
+    
+  }
+
+  function handleClear(e){
+    e.preventDefault();
+
+    clearContents(first)
+    clearContents(second)
+    result.textContent = '-'
+
+  }
+
+
+  first.addEventListener('input',handleInput)
+  second.addEventListener('input',handleInput)
+  clear.addEventListener('click',handleClear)
+
+
+ }
+
+
+
+
+
+ function phase2(){
+
+  const calculator = $('.calculator');
+  const result = $('.result');
+  const clear = $('#clear');
+  const numberInputs = [...document.querySelectorAll('input:not(#clear)')]
+
+
+  function handleInput(){
+    
+    const total = numberInputs.reduce((acc,cur)=> acc + Number(cur.value),0);
+    
+    clearContents(result);
+    insertLast(result,total);
+  }
+
+
+  function handleClear(e){
+    e.preventDefault();
+
+    numberInputs.forEach(clearContents);
+    result.textContent = '-';
+
+  }
+
+
+  calculator.addEventListener('input',handleInput)
+  clear.addEventListener('click',handleClear)
+ }
+
+
+
+
+
+
+ phase2()
+
+
+
+
+
+
+
+
