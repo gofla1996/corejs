@@ -1,58 +1,87 @@
-import {
-  tiger,
+
+
+
+import { 
+  tiger, 
   delayP,
   getNode,
+  insertLast, 
   changeColor,
   renderSpinner,
   renderUserCard,
   renderEmptyCard,
-} from './lib/index.js';
+ } from "./lib/index.js";
+
+
+
+const END_POINT = 'https://jsonplaceholder.typicode.com/users'
+
 
 const userCardInner = getNode('.user-card-inner');
 
-const END_POINT = 'https://jsonplaceholder.typicode.com/users';
 
-async function renderUserList() {
-  renderSpinner(userCardInner);
 
-  try {
+renderSpinner(userCardInner)
+
+
+
+async function renderUserList(){
+
+  try{
+
     const response = await tiger.get(END_POINT);
 
     // getNode('.loadingSpinner').remove()
 
-    gsap.to('.loadingSpinner', {
-      opacity: 0,
+    gsap.to('.loadingSpinner',{
+      opacity:0,
       onComplete(){
         this._targets[0].remove()
       }
-    });
+    })
 
     const data = response.data;
-
-    console.log(data);
-
+  
+    
     await delayP(1000)
-
-    data.forEach((user) => renderUserCard(userCardInner, user));
-
+  
+    
+    data.forEach((user)=> {
+      
+      renderUserCard(userCardInner,user)
+    })
+  
     changeColor('.user-card');
-
-    gsap.from('.user-card', {
-      x: -100,
-      opacity: 0,
-      stagger: {
-        amount: 1,
-        from: 'start',
-      },
-    });
-
-  } catch (error) {
-
-    renderEmptyCard(userCardInner);
+  
+    gsap.from('.user-card',{
+      x:-100,
+      opacity:0,
+      stagger:{
+        amount:1,
+        from:'start'
+      }
+    })
+  
+  
   }
+  catch{
+
+    renderEmptyCard(userCardInner)
+    
+  }
+
 }
 
-renderUserList();
+
+
+renderUserList()
+
+
+
+// 1. user 데이터 fetch 해주세요.
+
+
+// 2. fetch 데이터 유저의 이름만 콘솔에 출력 
 
 
 function handleDeleteCard(e){
@@ -62,14 +91,20 @@ function handleDeleteCard(e){
 
   const article = button.parentElement;
   const index = article.dataset.index.slice(5);
+  
+  // 삭제
+
+  if(!confirm('정말 삭제하시겠습니까?')) return;
 
   tiger.delete(`${END_POINT}/${index}`).then(()=>{
     alert('삭제가 완료됐습니다.')
-  });
+    article.remove()
+  })
+  
+
 
 }
 
+userCardInner.addEventListener('click',handleDeleteCard)
 
 
-
-userCardInner.addEventListener('click', handleDeleteCard);
