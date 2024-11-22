@@ -1,7 +1,7 @@
 import { getNode } from '../dom/getNode.js';
 import { isNumber, isObject } from './type.js'
-import { xhrPromise } from './xhr.js';
-import { insertLast } from '../dom/insert.js';
+import { xhrPromise } from './xhr.js'
+import { insertLast } from '../dom/insert.js'
 
 function delay(callback, timeout = 1000) {
   setTimeout(callback, timeout);
@@ -36,8 +36,8 @@ const p = new Promise((성공, 실패) => {
   }
 });
 
-p.then((data) => {
-  // console.log( data );
+p.then((res) => {
+  // console.log( res );
 });
 
 // promise 객체를 반환하는 함수 => 재사용
@@ -51,7 +51,7 @@ const defaultOptions = {
 }
 
 
-function delayP(options) {
+export function delayP(options) {
 
   let config = {...defaultOptions}
 
@@ -65,10 +65,10 @@ function delayP(options) {
 
   const {shouldRejected, data, errorMessage, timeout} = config
 
-  return new Promise((dataolve, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (!shouldRejected) {
-        dataolve(data);
+        resolve(data);
       } else {
         reject(errorMessage);
       }
@@ -80,13 +80,13 @@ function delayP(options) {
 // delayP(2000)
 
 // delayP(false)
-// .then((data)=>{ 
+// .then((res)=>{ 
 
 //   return delayP(false)
 // })
-// .then((data)=>{
+// .then((res)=>{
 
-//   console.log( data );
+//   console.log( res );
   
 // })
 
@@ -94,17 +94,17 @@ function delayP(options) {
 
 
 // delayP(false)
-//   .then((data) => {
+//   .then((res) => {
 
 //     first.style.top = '-100px';
 //     return delayP(false);
 //   })
-//   .then((data) => {
+//   .then((res) => {
 
 //     first.style.transform = 'rotate(360deg)';
 //     return delayP(false);
 //   })
-//   .then((data) => {
+//   .then((res) => {
 
 //     first.style.top = '0px';
 //     return delayP(false);
@@ -121,21 +121,21 @@ function delayP(options) {
 
 
 // id가 서버에 있는지 확인
-const promise = new Promise((dataolve,reject)=>{
+const promise = new Promise((resolve,reject)=>{
 
   // 서버와의 통신 
   setTimeout(() => {
     
-    dataolve({idValid:true}) 
+    resolve({idValid:true}) 
 
   }, 1000);
   
 })
 
 
-// promise.then((data)=>{
+// promise.then((res)=>{
 
-//   if(data.idValid){
+//   if(res.idValid){
 //     alert('너 있어')
 //     // 비밀번호 찾기 페이지로 이동 
 //   }else{
@@ -174,10 +174,22 @@ const promise = new Promise((dataolve,reject)=>{
 
 async function d(){
   
+
+  
+
+
   return 1
 }
 
-const _d = d();
+const _d = await d();
+
+
+// IIAFE
+
+(async function(){
+
+})()
+// console.log(await _d);
 
 // _d.then(console.log)
 
@@ -186,101 +198,115 @@ const _d = d();
 // async 함수는 무.조.건. Promise Object를 반환
 // await 2가지 기능 수행
 //        1. 코드 실행 흐름 제어
-//        2. datault 꺼내오기
+//        2. result 꺼내오기
 
 
 
 async function delayA(){  
 
-  const p = new Promise((dataolve)=>{
+  const p = new Promise((resolve)=>{
     setTimeout(() => {
-      dataolve('성공')
+      resolve('성공')
     }, 2000);
   })
 
   
-  const datault = await p;
+  const result = await p;
 
-  console.log( datault );
+  console.log( result );
   
 
-  return datault
+  return result
 }
 
-// console.log( delayA() );
+// console.log( await delayA() );
 
-// function _라면끓이기(){
+function _라면끓이기(){
 
-//   delayP({data:'물'})
-//   .then((data)=>{
-//     console.log( data );
+  delayP({data:'물'})
+  .then((res)=>{
+    console.log( res );
 
-//     return delayP({data:'스프'})
-//   })
-//   .then((data)=>{
-//     console.log( data );
+    return delayP({data:'스프'})
+  })
+  .then((res)=>{
+    console.log( res );
     
-//     return delayP({data:'면'})
-//   })
-//   .then((data)=>{
-//     console.log( data );
+    return delayP({data:'면'})
+  })
+  .then((res)=>{
+    console.log( res );
     
-//     return delayP({data:'계란'})
-//   })
-//   .then((data)=>{
-//     console.log( data );
+    return delayP({data:'계란'})
+  })
+  .then((res)=>{
+    console.log( res );
     
-//     return delayP({data:'그릇'})
-//   })
-//   .then((data)=>{
-//     console.log( data );
+    return delayP({data:'그릇'})
+  })
+  .then((res)=>{
+    console.log( res );
     
-//   })
+  })
   
-// }
+}
 
 
-// async function 라면끓이기(){
+async function 라면끓이기(){
 
-//   const a = await delayP({data:'물'})
-//   console.log( a );
+  const a = await delayP({data:'물'})
+  console.log( a );
   
-//   const b = await delayP({data:'스프'})
-//   console.log( b );
+  const b = await delayP({data:'스프'})
+  console.log( b );
 
-//   // const c = await delayP({data:'면'})
-//   console.log( '면' );
+  // const c = await delayP({data:'면'})
+  console.log( '면' );
 
-//   // const d = await delayP({data:'계란'})
-//   console.log( '계란' );
+  // const d = await delayP({data:'계란'})
+  console.log( '계란' );
 
-//   const e = await delayP({data:'그릇'})
-//   console.log( e );
+  const e = await delayP({data:'그릇'})
+  console.log( e );
   
-// }
+}
 
 
 // 라면끓이기()
 
 
-// function getData(){
-//   xhrPromise.get('https://pokeapi.co/api/v2/pokemon/50')
-//   .then((data)=>{
-//     console.log( data );
-
-//     insertLast(document.body,`<img src="${data.sprites.other.showdown['front_default']}" alt="" />`)
-    
-//   })
-// }
 
 async function getData(){
 
+  
   const data = await xhrPromise.get('https://pokeapi.co/api/v2/pokemon/50')
   
-    console.log( data );
-
-    insertLast(document.body,`<img src="${data.sprites.other.showdown['front_default']}" alt="" />`)
+  insertLast(document.body,`<img src="${data.sprites.other.showdown['front_default']}" alt="" />`)
 
 }
 
-getData()
+
+
+
+// getData()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

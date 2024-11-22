@@ -211,28 +211,28 @@ xhrPromise.delete = (url) => xhrPromise({ url, method:'DELETE' })
 
 
 
-xhrPromise.get(END_POINT)
-.then((res)=>{
+// xhrPromise.get(END_POINT)
+// .then((res)=>{
   
-  // console.log( res );
+//   // console.log( res );
   
-  res.forEach(({website})=>{
+//   res.forEach(({website})=>{
     
-    const tag = `
-      <div>site : ${website}</div>
-    `
+//     const tag = `
+//       <div>site : ${website}</div>
+//     `
 
-    document.body.insertAdjacentHTML('beforeend',tag)
+//     document.body.insertAdjacentHTML('beforeend',tag)
     
-  })
+//   })
   
-})
-.then(()=>{
+// })
+// .then(()=>{
 
-})
-.catch(()=>{
+// })
+// .catch(()=>{
 
-})
+// })
 
 
 
