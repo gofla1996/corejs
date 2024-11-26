@@ -1,44 +1,18 @@
 
+@import url('./theme.css');
 
 
-.container{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding:0.2rem;
-  gap:0.5rem;
-
-  & textarea{
-    resize:none;
-  }
-
-  & button{
-    flex:1;
-    width: 100%;
-    border: none;
-    background: dodgerblue;
-    color: white;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    cursor: pointer;
-  }
+.box{
+  background-color: orange;
 }
 
 
+.card{
+  background-color: var(--primary);
+}
 
 
-
-
-
-
-
-
-
-
-
-
+p{
+  background-color: var(--secondary);
+  font-size: 2rem;
+}
