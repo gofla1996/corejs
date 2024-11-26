@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server client --host=localhost --port=5500 --no-browser"
+    "dev": "live-server client --host=localhost --port=5500 --no-browser",
+    "serve": "json-server server/data/data.json",
+    "all": "run-p dev serve"
   },
   "keywords": [],
-  "author": "",
+  "author": "hyerim",
   "license": "ISC",
   "description": "",
   "devDependencies": {
