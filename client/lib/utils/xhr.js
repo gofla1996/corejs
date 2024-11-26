@@ -204,6 +204,7 @@ export function xhrPromise(options = {}){
 // })
 
 
+
 xhrPromise.get = (url) => xhrPromise({url})
 xhrPromise.post = (url,body) => xhrPromise({ url, body, method:'POST' })
 xhrPromise.put = (url,body) => xhrPromise({ url, body, method:'PUT' })
@@ -214,7 +215,7 @@ xhrPromise.delete = (url) => xhrPromise({ url, method:'DELETE' })
 // xhrPromise.get(END_POINT)
 // .then((res)=>{
   
-//   // console.log( res );
+//   console.log( res );
   
 //   res.forEach(({website})=>{
     

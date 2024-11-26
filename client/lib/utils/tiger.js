@@ -120,23 +120,24 @@ tiger.delete = (url,options) => {
 
 
 
-// function getGeolocation(){
+function getGeolocation(){
 
-//   return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
 
-//     navigator.geolocation.getCurrentPosition((data)=>{
-//       const {latitude:lat, longitude:long} = data.coords;
-//       resolve({ lat, long })
-//     })  
+    navigator.geolocation.getCurrentPosition((data)=>{
+      const {latitude:lat, longitude:long} = data.coords;
+      resolve({ lat, long })
+    })  
 
-//   })
+  })
 
-// }
+}
 
 
-// const data = await getGeolocation();
+const data = await getGeolocation();
 
 // console.log( data );
+
 
 
 

@@ -1,110 +1,72 @@
 
 
 
-import { 
-  tiger, 
-  delayP,
-  getNode,
-  insertLast, 
-  changeColor,
-  renderSpinner,
-  renderUserCard,
-  renderEmptyCard,
- } from "./lib/index.js";
+import { getNode, setStorage, getStorage, deleteStorage } from "./lib/index.js";
 
 
 
-const END_POINT = 'https://jsonplaceholder.typicode.com/users'
-
-
-const userCardInner = getNode('.user-card-inner');
-
-
-
-renderSpinner(userCardInner)
+const textField = getNode('#textField');
+const clearButton = getNode('button[data-name="clear"]');
 
 
 
-async function renderUserList(){
 
-  try{
+// 1. 인풋 이벤트 바인딩
+//     - 인풋(textarea) 태그 선택 
+//     - addEventListener('input',handler)
+//     - handler 함수 안에서 값 가져오기 (this.value)
 
-    const response = await tiger.get(END_POINT);
+// 2. 인풋 값을 로컬 스토리지에 저장(타이핑 하는 순간 순간마다)
+//     - setStorage(key,value)
 
-    // getNode('.loadingSpinner').remove()
+// 3. init 함수 안에서 로컬스토리지에 있는 값을 가져와 인풋의 value로 설정
+//     - getStorage
+//     - text.value = value
 
-    gsap.to('.loadingSpinner',{
-      opacity:0,
-      onComplete(){
-        this._targets[0].remove()
-      }
-    })
 
-    const data = response.data;
-  
-    
-    await delayP(1000)
-  
-    
-    data.forEach((user)=> {
-      
-      renderUserCard(userCardInner,user)
-    })
-  
-    changeColor('.user-card');
-  
-    gsap.from('.user-card',{
-      x:-100,
-      opacity:0,
-      stagger:{
-        amount:1,
-        from:'start'
-      }
-    })
-  
-  
-  }
-  catch{
+// 4. 새로고침 => 데이터 유지 
 
-    renderEmptyCard(userCardInner)
-    
-  }
+// 5. clear 버튼 클릭시 데이터 제거 (로컬스토리지, 인풋값)
 
+
+
+function handleInput(){
+  const value = this.value;
+  setStorage('text',value);
+}
+
+function handleClear(){
+  textField.value = '';
+  deleteStorage('text')
+}
+
+function init(){
+  getStorage('text')
+    .then((res)=> textField.value = res)
 }
 
 
 
-renderUserList()
+textField.addEventListener('input',handleInput)
+clearButton.addEventListener('click',handleClear)
+
+init();
 
 
 
-// 1. user 데이터 fetch 해주세요.
 
 
-// 2. fetch 데이터 유저의 이름만 콘솔에 출력 
 
 
-function handleDeleteCard(e){
-  const button = e.target.closest('button');
-
-  if(!button) return;
-
-  const article = button.parentElement;
-  const index = article.dataset.index.slice(5);
-  
-  // 삭제
-
-  if(!confirm('정말 삭제하시겠습니까?')) return;
-
-  tiger.delete(`${END_POINT}/${index}`).then(()=>{
-    alert('삭제가 완료됐습니다.')
-    article.remove()
-  })
-  
 
 
-}
 
-userCardInner.addEventListener('click',handleDeleteCard)
+
+
+
+
+
+
+
 
 
